@@ -16,18 +16,18 @@ int __thiscall CARequestAuthPacket_Structure(char *this, int *a2)
   int v13; // [esp+8h] [ebp-4h]
 
   v2 = this;
-  (*(*a2 + 60))("p_from", this + 8, 0);
-  (*(*a2 + 60))(a2, "p_to", v2 + 12, 0);
-  (*(*a2 + 68))("svc", v2 + 16, 0);
-  (*(*a2 + 120))("dev", v2 + 17, 0);
+  (*(a2->Reader->ReadUInt32))("p_from", this + 8, 0);
+  (*(a2->Reader->ReadUInt32))(a2, "p_to", v2 + 12, 0);
+  (*(a2->Reader->ReadByte))("svc", v2 + 16, 0);
+  (*(a2->Reader->ReadBool))("dev", v2 + 17, 0);
   if ( (*(*a2 + 28))() )
   {
-    v2[(*(*a2 + 220))("account", v2 + 18, 74) + 18] = 0;
+    v2[(*(a2->Reader->ReadString1))("account", v2 + 18, 74) + 18] = 0;
   }
   else
   {
     v3 = XlStringSize(v2 + 18);
-    (*(*a2 + 224))("account", v2 + 18, v3);
+    (*(a2->Reader->ReadString))("account", v2 + 18, v3);
   }
   v4 = (*(*a2 + 28))(v11, v12, v13);
   v5 = *a2;
@@ -43,7 +43,7 @@ int __thiscall CARequestAuthPacket_Structure(char *this, int *a2)
   else
     v9 = *(v8 + 224);
   v9("mac2", v2 + 101, 8);
-  return (*(*a2 + 56))("cpu", v2 + 112, 0);
+  return (*(a2->Reader->ReadUInt64))("cpu", v2 + 112, 0);
 }
 
 ----------------------------------------------------------------------
